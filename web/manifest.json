@@ -4,8 +4,8 @@
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0A0E12",
-    "theme_color": "#2DD4BF",
-    "description": "Profesyonel QR tarayıcı ve oluşturucu",
+    "theme_color": "#0D9488",
+    "description": "Production-ready QR tarayıcı ve oluşturucu",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

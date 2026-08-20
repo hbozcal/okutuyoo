@@ -1,4 +1,4 @@
-package com.qr_scanner.qr_scanner
+package app.okutuyo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,21 +1,42 @@
 # Okutuyo
 
-`qr_scanner` ve `qr-code-app-main` özelliklerinin tek dosyada birleştirilmiş profesyonel sürümü.
+Production-ready QR tarayıcı ve oluşturucu (Flutter).
 
 ## Özellikler
 
-- **Tara** — canlı kamera ile QR/barkod okuma, flaş, kamera çevirme, tarama çerçevesi
-- **Oluştur** — metin/URL’den anlık QR üretimi, kopyala / paylaş / geçmişe kaydet
-- **Geçmiş** — tarama ve oluşturma kayıtları (cihazda kalıcı)
-- Sonuç paneli: kopyala, paylaş, bağlantıyı aç, yeniden tara
+- Canlı QR tarama (`mobile_scanner`) — flaş, kamera çevirme, animasyonlu çerçeve
+- Duplicate scan koruması
+- Profesyonel kamera izin akışı
+- QR oluşturma (metin, URL, e-posta, telefon, Wi‑Fi)
+- Tip analizi (URL, tel, mail, SMS, Wi‑Fi, vCard, geo…)
+- Güvenli URL açma (javascript/file engeli + domain onayı)
+- Kalıcı geçmiş (arama, filtre, swipe-to-delete + undo)
+- Dark / Light tema (sistem)
+- TR/EN hazır string katmanı
 
-Tüm uygulama mantığı: `lib/main.dart`
+## Mimari
+
+```
+lib/
+  main.dart
+  app/
+  core/
+  features/scanner|generator|history
+  shared/
+```
 
 ## Çalıştırma
 
 ```bash
 flutter pub get
+flutter analyze
+flutter test
 flutter run
+flutter build apk --release
 ```
 
-Kamera izni Android/iOS ayarlarında tanımlıdır.
+## Android
+
+- `applicationId`: `app.okutuyo`
+- `minSdk`: Flutter default (24)
+- Release: R8/ProGuard açık (debug keystore ile imzalı — Play için kendi keystore’unuzu bağlayın)
