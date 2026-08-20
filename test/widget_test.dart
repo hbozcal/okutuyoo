@@ -1,30 +1,59 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_scanner/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const QRApp());
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('Okutuyo ana kabuk sekmeleri görünür', (tester) async {
+    await tester.pumpWidget(const OkutuyoApp());
+    await tester.pump(); // first frame
+    await tester.pump(const Duration(milliseconds: 100));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Okutuyo'), findsOneWidget);
+    expect(find.text('Tara'), findsWidgets);
+    expect(find.text('Oluştur'), findsOneWidget);
+    expect(find.text('Geçmiş'), findsOneWidget);
+  });
+
+  testWidgets('Oluştur sekmesinde metin girilince QR önizleme gelir',
+      (tester) async {
+    await tester.pumpWidget(const OkutuyoApp());
+    await tester.pump(const Duration(milliseconds: 100));
+
+    await tester.tap(find.text('Oluştur'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('QR Oluştur'), findsOneWidget);
+    expect(find.text('Önizleme burada görünecek'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'https://okutuyo.app');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Önizleme burada görünecek'), findsNothing);
+    expect(find.byType(QrImageView), findsOneWidget);
+  });
+
+  testWidgets('Geçmiş boş durumu gösterir', (tester) async {
+    await tester.pumpWidget(const OkutuyoApp());
+    await tester.pump(const Duration(milliseconds: 100));
+
+    await tester.tap(find.text('Geçmiş'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Henüz kayıt yok'), findsOneWidget);
+  });
+
+  test('looksLikeUrl yardımcıları', () {
+    expect(looksLikeUrl('https://example.com'), isTrue);
+    expect(looksLikeUrl('www.example.com'), isTrue);
+    expect(looksLikeUrl('sadece metin'), isFalse);
+    expect(toLaunchUri('https://example.com')?.host, 'example.com');
   });
 }
