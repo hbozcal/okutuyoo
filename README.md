@@ -1,16 +1,21 @@
-# qr_scanner
+# Okutuyo
 
-A new Flutter project.
+`qr_scanner` ve `qr-code-app-main` özelliklerinin tek dosyada birleştirilmiş profesyonel sürümü.
 
-## Getting Started
+## Özellikler
 
-This project is a starting point for a Flutter application.
+- **Tara** — canlı kamera ile QR/barkod okuma, flaş, kamera çevirme, tarama çerçevesi
+- **Oluştur** — metin/URL’den anlık QR üretimi, kopyala / paylaş / geçmişe kaydet
+- **Geçmiş** — tarama ve oluşturma kayıtları (cihazda kalıcı)
+- Sonuç paneli: kopyala, paylaş, bağlantıyı aç, yeniden tara
 
-A few resources to get you started if this is your first Flutter project:
+Tüm uygulama mantığı: `lib/main.dart`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Çalıştırma
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter pub get
+flutter run
+```
+
+Kamera izni Android/iOS ayarlarında tanımlıdır.
