@@ -1,16 +1,42 @@
-# qr_scanner
+# Okutuyo
 
-A new Flutter project.
+Production-ready QR tarayıcı ve oluşturucu (Flutter).
 
-## Getting Started
+## Özellikler
 
-This project is a starting point for a Flutter application.
+- Canlı QR tarama (`mobile_scanner`) — flaş, kamera çevirme, animasyonlu çerçeve
+- Duplicate scan koruması
+- Profesyonel kamera izin akışı
+- QR oluşturma (metin, URL, e-posta, telefon, Wi‑Fi)
+- Tip analizi (URL, tel, mail, SMS, Wi‑Fi, vCard, geo…)
+- Güvenli URL açma (javascript/file engeli + domain onayı)
+- Kalıcı geçmiş (arama, filtre, swipe-to-delete + undo)
+- Dark / Light tema (sistem)
+- TR/EN hazır string katmanı
 
-A few resources to get you started if this is your first Flutter project:
+## Mimari
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+lib/
+  main.dart
+  app/
+  core/
+  features/scanner|generator|history
+  shared/
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Çalıştırma
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+flutter build apk --release
+```
+
+## Android
+
+- `applicationId`: `app.okutuyo`
+- `minSdk`: Flutter default (24)
+- Release: R8/ProGuard açık (debug keystore ile imzalı — Play için kendi keystore’unuzu bağlayın)
